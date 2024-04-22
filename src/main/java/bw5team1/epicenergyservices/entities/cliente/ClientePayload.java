@@ -7,13 +7,11 @@ import lombok.Getter;
 
 import java.util.UUID;
 
-@Getter
-@AllArgsConstructor
 public record ClientePayload(
 
         UUID idCliente,
         String ragioneSociale,
-        int partitaIva,
+        long partitaIva,
         String email,
         String pec,
         int telefonoCliente,

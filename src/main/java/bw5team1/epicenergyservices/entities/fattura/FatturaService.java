@@ -2,6 +2,7 @@ package bw5team1.epicenergyservices.entities.fattura;
 
 import bw5team1.epicenergyservices.entities.cliente.ClienteRepository;
 import bw5team1.epicenergyservices.entities.cliente.ClienteService;
+import bw5team1.epicenergyservices.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -89,7 +90,7 @@ public class FatturaService {
     // filtro per stato fattura
     public Page<Fattura> filterByStatoFattura(String stato, int page, int pageSize) {
         Pageable pageable = PageRequest.of(page, pageSize);
-        return fatturaRepository.findByStatoFattura(stato, pageable);
+        return fatturaRepository.findByStato(stato, pageable);
     }
 
     // filtro per data
@@ -99,10 +100,10 @@ public class FatturaService {
     }
 
     // filtro per anno
-    public Page<Fattura> filterByAnno(int anno, int page, int pageSize) {
-        Pageable pageable = PageRequest.of(page, pageSize);
-        return fatturaRepository.findByAnno(anno, pageable);
-    }
+//    public Page<Fattura> filterByAnno(int anno, int page, int pageSize) {
+//        Pageable pageable = PageRequest.of(page, pageSize);
+//        return fatturaRepository.findByAnno(anno, pageable);
+//    }
 
     // filtro per importo
     public Page<Fattura> filterByImportRange(double minImporto, double maxImporto, int page, int pageSize) {

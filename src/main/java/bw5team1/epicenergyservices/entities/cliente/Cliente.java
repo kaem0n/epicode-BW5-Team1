@@ -4,24 +4,27 @@ import bw5team1.epicenergyservices.entities.fattura.Fattura;
 import bw5team1.epicenergyservices.entities.SedeLegale;
 import bw5team1.epicenergyservices.entities.SedeOperativa;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 @Getter
 @Setter
 @NoArgsConstructor
+//AGGIUNTO @AllArgsConstructor
+@AllArgsConstructor
+//AGGIUNTO @Builder
+@Builder
 @Entity
 @Table(name = "clienti")
 public class Cliente {
     @Setter(AccessLevel.NONE)
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "cliente_id")
     //CAMBIATO DA LONG A UUID
     private UUID id;
@@ -57,8 +60,9 @@ public class Cliente {
     @OneToOne
     @JoinColumn(name = "sede_operativa_id")
     private SedeOperativa sedeOperativa;
-    @OneToMany(mappedBy = "cliente")
-    private List<Fattura> fatture;
+    @OneToMany
+    @Builder.Default
+    private List<Fattura> fatture = new ArrayList<Fattura>();
 
     public Cliente(String ragioneSociale, long partitaIva, String email, LocalDate dataInserimento, LocalDate dataUltimoContatto, int fatturatoAnnuale, String pec, String telefono, String nomeContatto, String emailContatto, String cognomeContatto, String telefonoContatto, String logoUrl, TipoCliente tipo, SedeLegale sedeLegale, SedeOperativa sedeOperativa) {
         this.ragioneSociale = ragioneSociale;

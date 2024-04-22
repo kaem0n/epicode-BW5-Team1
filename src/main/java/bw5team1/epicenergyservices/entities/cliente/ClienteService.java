@@ -47,7 +47,7 @@ public class ClienteService {
     // filtro data ultimo contatto
     public Page<Cliente> filterUltimoContatto(LocalDate ultimoContatto, int page, int pageSize) {
         Pageable pageable = PageRequest.of(page, pageSize);
-        return clienteRepository.findByUltimoContatto(ultimoContatto, pageable);
+        return clienteRepository.findByDataUltimoContatto(ultimoContatto, pageable);
     }
 
     public Page<Cliente> filterRagioneSociale(String parteRagioneSociale, int page, int pageSize) {

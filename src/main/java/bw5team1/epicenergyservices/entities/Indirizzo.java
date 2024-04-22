@@ -1,5 +1,6 @@
 package bw5team1.epicenergyservices.entities;
 
+import bw5team1.epicenergyservices.entities.comune.Comune;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;

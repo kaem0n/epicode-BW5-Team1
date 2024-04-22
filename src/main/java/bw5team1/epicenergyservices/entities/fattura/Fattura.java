@@ -17,7 +17,8 @@ import java.util.UUID;
 public class Fattura {
     @Setter(AccessLevel.NONE)
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "fattura_id")
     private UUID id;
     private LocalDate data;
@@ -27,8 +28,8 @@ public class Fattura {
     private double numero;
     private String stato;
     //CAMBIATO DA CLIENTE A UUID
-    @ManyToOne
-    @JoinColumn(name = "cliente_id")
+//    @ManyToOne
+//    @JoinColumn(name = "cliente_id")
     private UUID idCliente;
 
     public Fattura(LocalDate data, double importo, double numero, String stato, UUID idCliente) {
