@@ -12,11 +12,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "sedi_legali")
 public class SedeLegale extends Indirizzo {
-    @Setter(AccessLevel.NONE)
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "sede_legale_id")
-    private long id;
+
     @OneToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
