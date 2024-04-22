@@ -1,6 +1,7 @@
 package bw5team1.epicenergyservices.security;
 
 import bw5team1.epicenergyservices.entities.Utente;
+import bw5team1.epicenergyservices.exceptions.UnauthorizedException;
 import io.jsonwebtoken.Jwt;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -43,4 +44,4 @@ public class JWTTools {
                 .build().parseSignedClaims(token).getPayload().getSubject();
     }
 }
-}
+

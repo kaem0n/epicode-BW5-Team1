@@ -1,6 +1,7 @@
 package bw5team1.epicenergyservices.security;
 
 import bw5team1.epicenergyservices.entities.Utente;
+import bw5team1.epicenergyservices.exceptions.UnauthorizedException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,6 +14,7 @@ import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.UUID;
 
 @Component
 
