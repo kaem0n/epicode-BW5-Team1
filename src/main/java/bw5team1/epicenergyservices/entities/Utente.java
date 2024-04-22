@@ -39,4 +39,5 @@ public class Utente {
         this.avatarUrl = avatarUrl;
         this.tipo = TipoUtente.USER;
     }
+
 }

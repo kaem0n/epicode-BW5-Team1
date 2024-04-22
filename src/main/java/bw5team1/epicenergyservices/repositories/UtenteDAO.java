@@ -4,7 +4,8 @@ import bw5team1.epicenergyservices.entities.Utente;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
+import java.util.UUID;
 
-public interface UtenteDAO extends JpaRepository<Utente, Long> {
+public interface UtenteDAO extends JpaRepository<Utente, UUID> {
     Optional<UtenteDAO> findByEmail(String email);
 }
