@@ -1,6 +1,8 @@
-package bw5team1.epicenergyservices.entities;
+package bw5team1.epicenergyservices.entities.cliente;
 
-import bw5team1.epicenergyservices.enums.TipoCliente;
+import bw5team1.epicenergyservices.entities.fattura.Fattura;
+import bw5team1.epicenergyservices.entities.SedeLegale;
+import bw5team1.epicenergyservices.entities.SedeOperativa;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -9,6 +11,7 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -20,7 +23,8 @@ public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cliente_id")
-    private long id;
+    //CAMBIATO DA LONG A UUID
+    private UUID id;
     @Column(name = "ragione_sociale")
     private String ragioneSociale;
     @Column(name = "partita_iva")
@@ -30,8 +34,9 @@ public class Cliente {
     private LocalDate dataInserimento;
     @Column(name = "data_ultimo_contatto")
     private LocalDate dataUltimoContatto;
+    // CAMBIATO DA INT A DOUBLE
     @Column(name = "fatturato_annuale")
-    private int fatturatoAnnuale;
+    private double fatturatoAnnuale;
     private String pec;
     private String telefono;
     @Column(name = "email_contatto")
