@@ -4,7 +4,7 @@ import bw5team1.epicenergyservices.enums.TipoUtente;
 import jakarta.validation.constraints.*;
 
 public record NewUtenteDTO(@NotEmpty(message = "L'username è obbligatorio")
-                           @Size(min = 4, max = 20, message = "L'username deve essere composto da almeno 4 caratteri e massimo 20")
+                           @Size(min = 3, max = 20, message = "L'username deve essere composto da almeno 3 caratteri e massimo 20")
                            String username,
                            @NotEmpty(message = "La password è obbligatorio")
                            @Size(min = 4, max = 20, message = "La password deve essere composto da almeno 4 caratteri e massimo 20")

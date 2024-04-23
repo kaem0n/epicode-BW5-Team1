@@ -56,12 +56,11 @@ public class UtenteController {
     // POST http://localhost:3001/utenti/{id}/avatar (+ file)
 
     @PostMapping("/{utentiId}/avatar")
-    public Utente updateAvatar(MultipartFile file, UUID utentiId){
-        try{
+    public Utente updateAvatar(@RequestParam("avatar")MultipartFile file, @PathVariable UUID utentiId) {
+        try {
             return utenteService.uploadAvatar(utentiId, file);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 }
