@@ -21,10 +21,19 @@ public class UtenteController {
     private UtenteService utenteService;
 
     // GET http://localhost:3001/utenti
+    @GetMapping
     public Page<Utente> getUtenti(@RequestParam(defaultValue = "0") int page,
                                   @RequestParam(defaultValue = "10") int size,
                                   @RequestParam(defaultValue = "id") String sort) {
         return utenteService.getUtente(page, size, sort);
+    }
+
+    // GET http://localhost:3001/utenti/{id}
+
+    @GetMapping("/{utentiId}")
+    public Utente findById(@PathVariable UUID utentiId) {
+
+        return utenteService.findById(utentiId);
     }
 
     // PUT http://localhost:3001/utenti/{id} (+ req.body)
@@ -36,11 +45,11 @@ public class UtenteController {
 
     // DELETE http://localhost:3001/utenti/{id}
 
-    @DeleteMapping("/{utentiId}")
+    @DeleteMapping("/{utenteId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<String> findByIdAndDelete(@PathVariable UUID utenteId) {
 
-        utenteService.findIDAndDelete(utenteId);
+        utenteService.findByIDAndDelete(utenteId);
         return ResponseEntity.ok("L'utente è stato cancellato con successo");
     }
 

@@ -17,7 +17,7 @@ import java.util.UUID;
 public abstract class Indirizzo {
     @Setter(AccessLevel.NONE)
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "indirizzo_id")
     private UUID id;
     private String via;

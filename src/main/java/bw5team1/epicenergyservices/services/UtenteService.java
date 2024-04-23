@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -64,7 +65,7 @@ public class UtenteService {
         return utenteDAO.save(found);
     }
 
-    public void findIDAndDelete(UUID id) {
+    public void findByIDAndDelete(UUID id) {
         Utente found = this.findById(id);
         utenteDAO.delete(found);
     }
@@ -75,6 +76,12 @@ public class UtenteService {
         found.setAvatarUrl(avatarUrl);
         return utenteDAO.save(found);
     }
+
+    public Utente findByEmail(String email){
+        return utenteDAO.findByEmail(email)
+                .orElseThrow(() -> new NotFoundException("L'utente con email " + email + " non è stato trovato!"));
+    }
+
 
 }
 

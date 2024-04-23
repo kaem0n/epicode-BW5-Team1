@@ -7,5 +7,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface UtenteDAO extends JpaRepository<Utente, UUID> {
-    Optional<UtenteDAO> findByEmail(String email);
+
+    boolean existsByEmail(String email);
+    Optional<Utente> findByEmail(String email);
 }
