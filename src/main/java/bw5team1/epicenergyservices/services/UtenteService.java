@@ -59,7 +59,7 @@ public class UtenteService {
         found.setNome(body.getNome());
         found.setCognome(body.getCognome());
         found.setEmail(body.getEmail());
-        found.setPassword(body.getPassword());
+        //found.setPassword(body.getPassword());
         found.setUsername(body.getUsername());
         found.setAvatarUrl("https://ui-avatars.com/api/?name=" + body.getNome().charAt(0) + "+" + body.getCognome().charAt(0));
         return utenteDAO.save(found);
