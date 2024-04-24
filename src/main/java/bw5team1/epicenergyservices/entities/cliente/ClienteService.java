@@ -91,32 +91,32 @@ public class ClienteService {
     }
 
     // modifica cliente
-    public Cliente findByIdAndUpdate(UUID id, ClientePayload body) throws ChangeSetPersister.NotFoundException {
-
-        Cliente found = this.findById(id);
-
-        found.setRagioneSociale(body.ragioneSociale());
-        found.setPartitaIva(body.partitaIva());
-        found.setEmail(body.email());
-        found.setPec(body.pec());
-        found.setTelefono(body.telefonoCliente());
-        found.setNomeContatto(body.nomeContatto());
-        found.setCognomeContatto(body.cognomeContatto());
-        found.setEmailContatto(body.emailContatto());
-        found.setTelefonoContatto(body.telefonoContatto());
-
-        if (!body.viaUno().equals(found.getSedeLegale().getVia())) {
-            Comune comune = comuneService.findByNameIgnoreCase(body.comuneUno());
-            Indirizzo indirizzo = indirizzoService.create(body.viaUno(), body.civicoUno(), body.localitaUno(), body.capUno(), comune);
-            found.setSedeLegale(indirizzo);
-        }
-
-        if (!body.viaDue().equals(found.getSedeOperativa().getVia())) {
-            Comune comune = comuneService.findByNameIgnoreCase(body.comuneDue());
-            Indirizzo indirizzo = indirizzoService.create(body.viaDue(), body.civicoDue(), body.localitaDue(), body.capDue(), comune);
-            found.setSedeOperativa(indirizzo);
-        }
-
-        return clienteRepository.save(found);
-    }
+//    public Cliente findByIdAndUpdate(UUID id, ClientePayload body) throws ChangeSetPersister.NotFoundException {
+//
+//        Cliente found = this.findById(id);
+//
+//        found.setRagioneSociale(body.ragioneSociale());
+//        found.setPartitaIva(body.partitaIva());
+//        found.setEmail(body.email());
+//        found.setPec(body.pec());
+//        found.setTelefono(body.telefonoCliente());
+//        found.setNomeContatto(body.nomeContatto());
+//        found.setCognomeContatto(body.cognomeContatto());
+//        found.setEmailContatto(body.emailContatto());
+//        found.setTelefonoContatto(body.telefonoContatto());
+//
+//        if (!body.viaUno().equals(found.getSedeLegale().getVia())) {
+//            Comune comune = comuneService.findByNameIgnoreCase(body.comuneUno());
+//            Indirizzo indirizzo = indirizzoService.create(body.viaUno(), body.civicoUno(), body.localitaUno(), body.capUno(), comune);
+//            found.setSedeLegale(indirizzo);
+//        }
+//
+//        if (!body.viaDue().equals(found.getSedeOperativa().getVia())) {
+//            Comune comune = comuneService.findByNameIgnoreCase(body.comuneDue());
+//            Indirizzo indirizzo = indirizzoService.create(body.viaDue(), body.civicoDue(), body.localitaDue(), body.capDue(), comune);
+//            found.setSedeOperativa(indirizzo);
+//        }
+//
+//        return clienteRepository.save(found);
+//    }
 }

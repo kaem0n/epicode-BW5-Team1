@@ -39,10 +39,10 @@ public class ClienteController {
         clienteService.findByIdAndDelete(id);
     }
 
-    @PutMapping("/{Id}")
-    public Cliente updateCliente(@PathVariable UUID id, @RequestBody ClientePayload body) throws ChangeSetPersister.NotFoundException {
-        return clienteService.findByIdAndUpdate(id, body);
-    }
+//    @PutMapping("/{Id}")
+//    public Cliente updateCliente(@PathVariable UUID id, @RequestBody ClientePayload body) throws ChangeSetPersister.NotFoundException {
+//        return clienteService.findByIdAndUpdate(id, body);
+//    }
 
     //--------------------------------------------------------------------------- ordinamenti
     @GetMapping("")
