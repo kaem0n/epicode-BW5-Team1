@@ -100,10 +100,10 @@ public class FatturaService {
     }
 
     // filtro per anno
-//    public Page<Fattura> filterByAnno(int anno, int page, int pageSize) {
-//        Pageable pageable = PageRequest.of(page, pageSize);
-//        return fatturaRepository.findByAnno(anno, pageable);
-//    }
+    public Page<Fattura> filterByAnno(int anno, int page, int pageSize) {
+        Pageable pageable = PageRequest.of(page, pageSize);
+        return fatturaRepository.findByAnno(anno, pageable);
+    }
 
     // filtro per importo
     public Page<Fattura> filterByImportRange(double minImporto, double maxImporto, int page, int pageSize) {
