@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -16,9 +18,11 @@ public class Comune {
     @Setter(AccessLevel.NONE)
     @Id
     @Column(name = "comune_id")
-    private long id;
+    private UUID id;
     private String nome;
     @ManyToOne
     @JoinColumn(name = "provincia_id")
     private Provincia provincia;
+
+
 }

@@ -3,6 +3,7 @@ package bw5team1.epicenergyservices.services;
 import bw5team1.epicenergyservices.entities.Utente;
 import bw5team1.epicenergyservices.exceptions.UnauthorizedException;
 import bw5team1.epicenergyservices.payloads.utente.UtenteLoginDTO;
+import bw5team1.epicenergyservices.security.JWTFilter;
 import bw5team1.epicenergyservices.security.JWTTools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,20 +16,19 @@ public class AuthService {
     private UtenteService utenteService;
 
     @Autowired
-    private JWTTools jwtTools;
+    private PasswordEncoder bcrypt;
 
     @Autowired
-    private PasswordEncoder bcrypt;
+    private JWTTools jwtTools;
 
     public String authenticateUtenteAndGenerateToken(UtenteLoginDTO payload){
 
         Utente utente = this.utenteService.findByEmail(payload.email());
-        if (bcrypt.matches(payload.password(), utente.getPassword())) {
 
+        if(bcrypt.matches(payload.password(), utente.getPassword())) {
             return jwtTools.createToken(utente);
         } else {
-
-            throw new UnauthorizedException("Credenziali non valide! Effettua di nuovo il login!");
+            throw new UnauthorizedException("Credenziali non valide");
         }
     }
 }
