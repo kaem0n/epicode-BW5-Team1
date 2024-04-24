@@ -2,7 +2,9 @@ package bw5team1.epicenergyservices.entities.cliente;
 
 import bw5team1.epicenergyservices.entities.Indirizzo;
 import bw5team1.epicenergyservices.entities.comune.Comune;
+import bw5team1.epicenergyservices.entities.comune.ComuneService;
 import bw5team1.epicenergyservices.entities.fattura.Fattura;
+import bw5team1.epicenergyservices.services.IndirizzoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.domain.*;

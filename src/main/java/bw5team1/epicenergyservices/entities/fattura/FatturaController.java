@@ -73,14 +73,14 @@ public class FatturaController {
 
     //---------------------------------------------------------------------------
     // filtro per anno
-    @GetMapping("/filter/anno")
-    public Page<Fattura> filterByAnno(
-            @RequestParam int anno,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int pageSize
-    ) {
-        return fatturaService.filterByAnno(anno, page, pageSize);
-    }
+//    @GetMapping("/filter/anno")
+//    public Page<Fattura> filterByAnno(
+//            @RequestParam int anno,
+//            @RequestParam(defaultValue = "0") int page,
+//            @RequestParam(defaultValue = "10") int pageSize
+//    ) {
+//        return fatturaService.filterByAnno(anno, page, pageSize);
+//    }
 
 
     // ---------------------------------------------------------------------------
