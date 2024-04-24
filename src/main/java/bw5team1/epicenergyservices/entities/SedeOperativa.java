@@ -1,5 +1,7 @@
 package bw5team1.epicenergyservices.entities;
 
+import bw5team1.epicenergyservices.entities.cliente.Cliente;
+import bw5team1.epicenergyservices.entities.comune.Comune;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -12,11 +14,6 @@ import lombok.Setter;
 @Entity
 @Table(name = "sedi_operative")
 public class SedeOperativa extends Indirizzo {
-    @Setter(AccessLevel.NONE)
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "sede_operativa_id")
-    private long id;
     @OneToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;

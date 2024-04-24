@@ -1,7 +1,10 @@
-package bw5team1.epicenergyservices.entities;
+package bw5team1.epicenergyservices.entities.comune;
 
+import bw5team1.epicenergyservices.entities.provincia.Provincia;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -13,9 +16,11 @@ public class Comune {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "comune_id")
-    private long id;
+    private UUID id;
     private String nome;
     @ManyToOne
     @JoinColumn(name = "provincia_id")
     private Provincia provincia;
+
+
 }

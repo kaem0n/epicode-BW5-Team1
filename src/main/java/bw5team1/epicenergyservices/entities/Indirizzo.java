@@ -1,10 +1,13 @@
 package bw5team1.epicenergyservices.entities;
 
+import bw5team1.epicenergyservices.entities.comune.Comune;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -14,9 +17,9 @@ import lombok.Setter;
 public abstract class Indirizzo {
     @Setter(AccessLevel.NONE)
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "indirizzo_id")
-    private long id;
+    private UUID id;
     private String via;
     private int civico;
     private int cap;

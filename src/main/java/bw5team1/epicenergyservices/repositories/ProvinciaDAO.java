@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface ProvinciaDAO extends JpaRepository<Provincia, Long> {
+public interface ProvinciaDAO extends JpaRepository<Provincia, String> {
+    Optional<Provincia> findBySigla(String sigla);
     Optional<Provincia> findByNome(String nome);
 }
