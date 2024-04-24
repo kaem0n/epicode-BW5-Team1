@@ -25,7 +25,7 @@ public class ProvinciaService {
     }
 
     public Provincia findByName(String nome){
-        return provinciaDAO.findByNome(nome).orElseThrow(() -> new NotFoundException(nome));
+        return provinciaDAO.findByNomeIgnoreCase(nome).orElseThrow(() -> new NotFoundException(nome));
     }
 
 

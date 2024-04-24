@@ -14,7 +14,7 @@ public class ProvinciaController {
     @GetMapping
     public Page<Provincia> getProvincia(@RequestParam(defaultValue = "0") int page,
                                         @RequestParam(defaultValue = "10") int size,
-                                        @RequestParam(defaultValue = "id") String sort) {
+                                        @RequestParam(defaultValue = "sigla") String sort) {
         return provinciaService.findAll(page, size, sort);
     }
 
@@ -23,7 +23,7 @@ public class ProvinciaController {
         return provinciaService.findById(sigla);
     }
 
-    @GetMapping("/{nome}")
+    @GetMapping("/nome/{nome}")
     public Provincia findByName(@PathVariable String nome) {
         return provinciaService.findByName(nome);
     }

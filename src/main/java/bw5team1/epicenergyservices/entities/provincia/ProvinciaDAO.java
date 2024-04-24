@@ -7,6 +7,5 @@ import java.util.Optional;
 
 @Repository
 public interface ProvinciaDAO extends JpaRepository<Provincia, String> {
-    Optional<Provincia> findBySigla(String sigla);
-    Optional<Provincia> findByNome(String nome);
+    Optional<Provincia> findByNomeIgnoreCase(String nome);
 }
