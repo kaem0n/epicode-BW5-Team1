@@ -23,8 +23,6 @@ import java.util.UUID;
 public class Cliente {
     @Setter(AccessLevel.NONE)
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "cliente_id")
     //CAMBIATO DA LONG A UUID
     private UUID id;

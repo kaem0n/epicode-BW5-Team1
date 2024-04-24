@@ -12,9 +12,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "sedi_legali")
 public class SedeLegale extends Indirizzo {
-
     @OneToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;

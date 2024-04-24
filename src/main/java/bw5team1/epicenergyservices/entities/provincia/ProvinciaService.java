@@ -1,37 +1,19 @@
 package bw5team1.epicenergyservices.entities.provincia;
 
+import bw5team1.epicenergyservices.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
-/*@Service
+@Service
 public class ProvinciaService {
     @Autowired
-    private ProvinciaRepository provinciaRepo;
+    private ProvinciaDAO pd;
 
-    public Provincia create(String sigla, String provincia, String regione) {
-
-        Provincia p = new Provincia(sigla, provincia);
-
-        return provinciaRepo.save(p);
+    public Provincia findByName(String nome){
+        return pd.findByNome(nome).orElseThrow(() -> new NotFoundException(nome));
     }
 
-    public List<Provincia> find() {
-        return provinciaRepo.findAll();
+    public Provincia save(Provincia p) {
+        return pd.save(p);
     }
-
-    public Page<Provincia> findAll(int page, String ordinamento) {
-        Pageable pagina = PageRequest.of(page, 10, Sort.by(ordinamento));
-        return provinciaRepo.findAll(pagina);
-    }
-
-    public Provincia findByName(String nomeProvincia) {
-        return provinciaRepo.findByProvinciaIgnoreCase(nomeProvincia);
-    }
-
-}*/
+}
