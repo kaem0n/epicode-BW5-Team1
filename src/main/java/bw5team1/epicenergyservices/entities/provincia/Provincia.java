@@ -1,4 +1,4 @@
-package bw5team1.epicenergyservices.entities;
+package bw5team1.epicenergyservices.entities.provincia;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;

@@ -16,11 +16,14 @@ public class Comune {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "comune_id")
-    private UUID id;
+    private long id;
     private String nome;
     @ManyToOne
     @JoinColumn(name = "provincia_id")
     private Provincia provincia;
 
-
+    public Comune(String nome, Provincia provincia) {
+        this.nome = nome;
+        this.provincia = provincia;
+    }
 }

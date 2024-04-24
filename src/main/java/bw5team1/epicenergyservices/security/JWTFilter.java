@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.util.UUID;
 
 @Component
-
 public class JWTFilter extends OncePerRequestFilter {
     @Autowired
     private JWTTools jwtTools;
