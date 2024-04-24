@@ -1,10 +1,10 @@
 package bw5team1.epicenergyservices.entities.cliente;
 
-import bw5team1.epicenergyservices.entities.Indirizzo;
 import bw5team1.epicenergyservices.entities.comune.Comune;
 import bw5team1.epicenergyservices.entities.comune.ComuneService;
 import bw5team1.epicenergyservices.entities.fattura.Fattura;
-import bw5team1.epicenergyservices.services.IndirizzoService;
+
+import bw5team1.epicenergyservices.entities.indirizzo.IndirizzoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.domain.*;
@@ -66,7 +66,7 @@ public class ClienteService {
         return clienteRepository.findByRagioneSocialeContaining(nomeCapitalized, pageable);
     }
 
-    /*public Page<Cliente> filterProvincia(String provinciaSedeLegale, int page, int pageSize) {
+    public Page<Cliente> filterProvincia(String provinciaSedeLegale, int page, int pageSize) {
         Pageable pageable = PageRequest.of(page, pageSize);
 
         List<Cliente> clientiTrovati = clienteRepository.findAll().stream().filter(
@@ -74,7 +74,7 @@ public class ClienteService {
                 .collect(Collectors.toList());
 
         return new PageImpl<>(clientiTrovati, pageable, clientiTrovati.size());
-    }*/
+    }
     // modifica cliente a inserimento fattura
     public Cliente findByIdAndUpdateFattura(UUID id, double importo, Fattura nuovaFattura) throws ChangeSetPersister.NotFoundException {
         Cliente cliente = clienteRepository.findById(id).orElseThrow(() -> new ChangeSetPersister.NotFoundException());
