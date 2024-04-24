@@ -62,12 +62,12 @@ public class Cliente {
     @Builder.Default
     private List<Fattura> fatture = new ArrayList<Fattura>();
 
-    public Cliente(String ragioneSociale, long partitaIva, String email, LocalDate dataInserimento, LocalDate dataUltimoContatto, int fatturatoAnnuale, String pec, String telefono, String nomeContatto, String emailContatto, String cognomeContatto, String telefonoContatto, String logoUrl, TipoCliente tipo, SedeLegale sedeLegale, SedeOperativa sedeOperativa) {
+    public Cliente(String ragioneSociale, long partitaIva, String email, int fatturatoAnnuale, String pec, String telefono, String nomeContatto, String emailContatto, String cognomeContatto, String telefonoContatto, String logoUrl, TipoCliente tipo, SedeLegale sedeLegale, SedeOperativa sedeOperativa) {
         this.ragioneSociale = ragioneSociale;
         this.partitaIva = partitaIva;
         this.email = email;
-        this.dataInserimento = dataInserimento;
-        this.dataUltimoContatto = dataUltimoContatto;
+        this.dataInserimento = LocalDate.now();
+//        this.dataUltimoContatto = dataUltimoContatto;
         this.fatturatoAnnuale = fatturatoAnnuale;
         this.pec = pec;
         this.telefono = telefono;

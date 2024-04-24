@@ -9,25 +9,25 @@ import java.util.UUID;
 
 public record ClientePayload(
 
-        UUID idCliente,
+//        UUID idCliente,
         String ragioneSociale,
         long partitaIva,
         String email,
         String pec,
-        String telefonoCliente,
+        String telefonoCliente, //telefono
         String nomeContatto,
         String cognomeContatto,
         String emailContatto,
         String telefonoContatto,
         String viaUno,
-        String civicoUno,
-        String localitaUno,
-        String capUno,
+        int civicoUno,
+//        String localitaUno,
+        int capUno,
         String comuneUno,
         String viaDue,
-        String civicoDue,
-        String localitaDue,
-        String capDue,
+        int civicoDue,
+//        String localitaDue,
+        int capDue,
         String comuneDue
 ) {
 }
