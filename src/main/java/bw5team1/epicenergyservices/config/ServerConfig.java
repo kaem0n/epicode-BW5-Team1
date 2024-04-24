@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-public class serverConfig {
+public class ServerConfig {
 
     @Bean
     public Cloudinary uploader(@Value("${cloudinary.name}") String name,

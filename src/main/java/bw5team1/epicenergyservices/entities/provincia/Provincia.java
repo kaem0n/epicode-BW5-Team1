@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.UUID;
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -21,10 +19,9 @@ public class Provincia {
     private String nome;
     private String regione;
 
-    public Provincia(String sigla, String nome, String regione) {
-        this.sigla = sigla;
+    public Provincia(String nome, String regione, String sigla) {
         this.nome = nome;
         this.regione = regione;
+        this.sigla = sigla;
     }
 }
-

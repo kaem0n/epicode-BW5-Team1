@@ -2,10 +2,7 @@ package bw5team1.epicenergyservices.entities.comune;
 
 import bw5team1.epicenergyservices.entities.provincia.Provincia;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.UUID;
 
@@ -25,5 +22,8 @@ public class Comune {
     @JoinColumn(name = "provincia_id")
     private Provincia provincia;
 
-
+    public Comune(String nome, Provincia provincia) {
+        this.nome = nome;
+        this.provincia = provincia;
+    }
 }

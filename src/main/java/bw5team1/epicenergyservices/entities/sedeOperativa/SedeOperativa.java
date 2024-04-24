@@ -12,7 +12,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "sedi_operative")
 public class SedeOperativa extends Indirizzo {
     @OneToOne
     @JoinColumn(name = "cliente_id")
