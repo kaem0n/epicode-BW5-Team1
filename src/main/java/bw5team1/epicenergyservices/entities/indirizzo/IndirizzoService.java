@@ -40,7 +40,7 @@ public class IndirizzoService {
                 }
         );
 
-        Optional<Comune> comuneOptional = comuneDAO.findByNome(String.valueOf(body.comune_id()));
+        Optional<Comune> comuneOptional = comuneDAO.findByNomeIgnoreCase(String.valueOf(body.comune_id()));
         if (!comuneOptional.isPresent()) {
             throw new NotFoundException("Comune with id " + body.comune_id() + " not found");
         }
@@ -58,7 +58,7 @@ public class IndirizzoService {
                 }
         );
 
-        Optional<Comune> comuneOptional = comuneDAO.findByNome(String.valueOf(body.comune_id()));
+        Optional<Comune> comuneOptional = comuneDAO.findByNomeIgnoreCase(String.valueOf(body.comune_id()));
         if (!comuneOptional.isPresent()) {
             throw new NotFoundException("Comune with id " + body.comune_id() + " not found");
         }
