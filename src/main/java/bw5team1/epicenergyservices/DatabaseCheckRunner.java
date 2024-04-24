@@ -12,7 +12,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
-import java.util.Arrays;
 import java.util.List;
 
 @Component
