@@ -4,7 +4,12 @@ import bw5team1.epicenergyservices.entities.comune.Comune;
 import bw5team1.epicenergyservices.entities.comune.ComuneService;
 import bw5team1.epicenergyservices.entities.fattura.Fattura;
 
+import bw5team1.epicenergyservices.entities.indirizzo.Indirizzo;
+import bw5team1.epicenergyservices.entities.indirizzo.IndirizzoDAO;
 import bw5team1.epicenergyservices.entities.indirizzo.IndirizzoService;
+import bw5team1.epicenergyservices.entities.sedeLegale.SedeLegale;
+import bw5team1.epicenergyservices.entities.sedeOperativa.SedeOperativa;
+import bw5team1.epicenergyservices.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.domain.*;
@@ -25,6 +30,9 @@ public class ClienteService {
 
     @Autowired
     IndirizzoService indirizzoService;
+
+    @Autowired
+    IndirizzoDAO indirizzoDAO;
 
     // trova cliente per id
     public Cliente findById(UUID id) throws ChangeSetPersister.NotFoundException {
@@ -91,32 +99,69 @@ public class ClienteService {
     }
 
     // modifica cliente
-//    public Cliente findByIdAndUpdate(UUID id, ClientePayload body) throws ChangeSetPersister.NotFoundException {
-//
-//        Cliente found = this.findById(id);
-//
-//        found.setRagioneSociale(body.ragioneSociale());
-//        found.setPartitaIva(body.partitaIva());
-//        found.setEmail(body.email());
-//        found.setPec(body.pec());
-//        found.setTelefono(body.telefonoCliente());
-//        found.setNomeContatto(body.nomeContatto());
-//        found.setCognomeContatto(body.cognomeContatto());
-//        found.setEmailContatto(body.emailContatto());
-//        found.setTelefonoContatto(body.telefonoContatto());
-//
-//        if (!body.viaUno().equals(found.getSedeLegale().getVia())) {
-//            Comune comune = comuneService.findByNameIgnoreCase(body.comuneUno());
-//            Indirizzo indirizzo = indirizzoService.create(body.viaUno(), body.civicoUno(), body.localitaUno(), body.capUno(), comune);
-//            found.setSedeLegale(indirizzo);
-//        }
-//
-//        if (!body.viaDue().equals(found.getSedeOperativa().getVia())) {
-//            Comune comune = comuneService.findByNameIgnoreCase(body.comuneDue());
-//            Indirizzo indirizzo = indirizzoService.create(body.viaDue(), body.civicoDue(), body.localitaDue(), body.capDue(), comune);
-//            found.setSedeOperativa(indirizzo);
-//        }
-//
-//        return clienteRepository.save(found);
-//    }
+    public Cliente findByIdAndUpdate(UUID id, ClientePayload body) throws ChangeSetPersister.NotFoundException {
+
+        Cliente found = this.findById(id);
+
+        found.setRagioneSociale(body.ragioneSociale());
+        found.setPartitaIva(body.partitaIva());
+        found.setEmail(body.email());
+        found.setPec(body.pec());
+        found.setTelefono(body.telefonoCliente());
+        found.setNomeContatto(body.nomeContatto());
+        found.setCognomeContatto(body.cognomeContatto());
+        found.setEmailContatto(body.emailContatto());
+        found.setTelefonoContatto(body.telefonoContatto());
+
+        // indirizzo 1
+        Comune comuneUno = comuneService.findByNome(body.comuneUno());
+        SedeLegale sedeLegale = new SedeLegale(body.civicoUno(), body.viaUno(), body.capUno(), comuneUno, found);
+
+        // indirizzo 2
+        Comune comuneDue = comuneService.findByNome(body.comuneDue());
+        SedeOperativa sedeOperativa = new SedeOperativa(body.civicoDue(), body.viaDue(), body.capDue(), comuneDue, found);
+
+        return clienteRepository.save(found);
+    }
+
+    public Cliente creaCliente(ClientePayload body) throws NotFoundException {
+
+        // Crea un cliente vuoto
+        Cliente newCliente = new Cliente();
+
+        //Salva il cliente
+//        clienteRepository.save(newCliente);
+
+        // Crea indirizzo 1
+        Comune comuneUno = comuneService.findByNome(body.comuneUno());
+        SedeLegale sedeLegale = new SedeLegale(body.civicoUno(), body.viaUno(), body.capUno(), comuneUno, newCliente);
+
+        // Crea indirizzo 2
+        Comune comuneDue = comuneService.findByNome(body.comuneDue());
+        SedeOperativa sedeOperativa = new SedeOperativa(body.civicoDue(), body.viaDue(), body.capDue(), comuneDue, newCliente);
+
+        // Imposta i dettagli del cliente
+        newCliente.setRagioneSociale(body.ragioneSociale());
+        newCliente.setPartitaIva(body.partitaIva());
+        newCliente.setEmail(body.email());
+        newCliente.setPec(body.pec());
+        newCliente.setTelefono(body.telefonoCliente());
+        newCliente.setNomeContatto(body.nomeContatto());
+        newCliente.setCognomeContatto(body.cognomeContatto());
+        newCliente.setEmailContatto(body.emailContatto());
+        newCliente.setTelefonoContatto(body.telefonoContatto());
+        newCliente.setDataInserimento(LocalDate.now());
+        newCliente.setSedeLegale(sedeLegale);
+        newCliente.setSedeOperativa(sedeOperativa);
+
+        // Salva i nuovi indirizzi
+        indirizzoDAO.save(sedeLegale);
+        indirizzoDAO.save(sedeOperativa);
+
+        // Salva il cliente con gli indirizzi associati
+        return clienteRepository.save(newCliente);
+    }
+
+
+
 }

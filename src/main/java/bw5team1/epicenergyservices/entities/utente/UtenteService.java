@@ -34,7 +34,7 @@ public class UtenteService {
               throw  new BadRequestException("L'email " + body.email() + " è già in uso");
           }
         );
-        Utente utente = new Utente(body.username(), bcrypt.encode(body.password()), body.email(), body.nome(), body.cognome(), "https://ui-avatars.com/api/?name="+ body.nome().charAt(0) + "+" + body.cognome().charAt(0));
+        Utente utente = new Utente(body.username(), bcrypt.encode(body.password()), body.email(), body.nome(), body.cognome(), "https://ui-avatars.com/api/?name="+ body.nome().charAt(0) + "+" + body.cognome().charAt(0), TipoUtente.valueOf(body.tipo()));
         return utenteDAO.save(utente);
     }
 

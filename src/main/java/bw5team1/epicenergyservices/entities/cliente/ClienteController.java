@@ -17,14 +17,14 @@ public class ClienteController {
     @Autowired
     ClienteService clienteService;
 
-//    @PostMapping
-//    @ResponseStatus(HttpStatus.CREATED)
-//    public Cliente salvaCliente(@RequestBody ClientePayload body) throws NotFoundException {
-//
-//        Cliente clienteCreato = clienteService.creaCliente(body);
-//
-//        return clienteCreato;
-//    }
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Cliente salvaCliente(@RequestBody ClientePayload body) throws NotFoundException {
+
+        Cliente clienteCreato = clienteService.creaCliente(body);
+
+        return clienteCreato;
+    }
 
     //--------------------------------------------------------------------------- trova per id
     @GetMapping("/{id}")

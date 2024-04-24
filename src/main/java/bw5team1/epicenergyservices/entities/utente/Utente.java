@@ -38,14 +38,14 @@ public class Utente implements UserDetails {
     @Enumerated(EnumType.STRING)
     private TipoUtente tipo;
 
-    public Utente(String username, String password, String email, String nome, String cognome, String avatarUrl) {
+    public Utente(String username, String password, String email, String nome, String cognome, String avatarUrl, TipoUtente tipo) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.nome = nome;
         this.cognome = cognome;
         this.avatarUrl = avatarUrl;
-        this.tipo = TipoUtente.USER;
+        this.tipo = tipo;
     }
 
     @Override

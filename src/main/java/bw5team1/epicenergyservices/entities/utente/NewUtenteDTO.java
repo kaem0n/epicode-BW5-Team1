@@ -18,6 +18,6 @@ public record NewUtenteDTO(@NotEmpty(message = "L'username è obbligatorio")
                            @Size(min = 3, max = 20, message = "Il cognome deve essere composto da almeno 3 caratteri e massimo 20")
                            String cognome,
                            @NotNull(message = "Il tipo utente è obbligatorio")
-                           //@Pattern(regexp = "USER|ADMIN", message = "Il tipo utente deve essere USER o ADMIN")
-                           TipoUtente tipo) {
+                           @Pattern(regexp = "USER|ADMIN", message = "Il tipo utente deve essere USER o ADMIN")
+                           String tipo) {
 }
