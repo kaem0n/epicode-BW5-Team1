@@ -19,7 +19,7 @@ public class AuthController {
     @Autowired
     private AuthService authService;
     @Autowired
-    private UtenteService dipendentiService;
+    private UtenteService utenteService;
 
     @PostMapping("/login")
     public UtenteLoginRespDTO login(@RequestBody UtenteLoginDTO payload){
@@ -33,7 +33,7 @@ public class AuthController {
             throw new BadRequestException(validation.getAllErrors());
         }
 
-        return new NewUtenteRespDTO(this.dipendentiService.save(body).getId());
+        return new NewUtenteRespDTO(this.utenteService.save(body).getId());
     }
 
 }
