@@ -1,12 +1,7 @@
-package bw5team1.epicenergyservices.services;
+package bw5team1.epicenergyservices.entities.indirizzo;
 
-import bw5team1.epicenergyservices.entities.Indirizzo;
-import bw5team1.epicenergyservices.entities.comune.Comune;
-import bw5team1.epicenergyservices.exceptions.BadRequestException;
 import bw5team1.epicenergyservices.exceptions.NotFoundException;
-import bw5team1.epicenergyservices.payloads.indirizzo.NewIndirizzoDTO;
-import bw5team1.epicenergyservices.repositories.ComuneDAO;
-import bw5team1.epicenergyservices.repositories.IndirizzoDAO;
+import bw5team1.epicenergyservices.entities.comune.ComuneDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

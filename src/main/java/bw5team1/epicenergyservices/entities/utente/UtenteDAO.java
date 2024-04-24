@@ -1,6 +1,6 @@
-package bw5team1.epicenergyservices.repositories;
+package bw5team1.epicenergyservices.entities.utente;
 
-import bw5team1.epicenergyservices.entities.Utente;
+import bw5team1.epicenergyservices.entities.utente.Utente;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

@@ -1,4 +1,4 @@
-package bw5team1.epicenergyservices.repositories;
+package bw5team1.epicenergyservices.entities.comune;
 
 ;
 

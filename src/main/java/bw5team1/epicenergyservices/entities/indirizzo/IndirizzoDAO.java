@@ -1,6 +1,6 @@
-package bw5team1.epicenergyservices.repositories;
+package bw5team1.epicenergyservices.entities.indirizzo;
 
-import bw5team1.epicenergyservices.entities.Indirizzo;
+import bw5team1.epicenergyservices.entities.indirizzo.Indirizzo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

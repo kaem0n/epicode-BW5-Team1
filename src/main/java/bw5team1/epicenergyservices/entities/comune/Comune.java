@@ -17,8 +17,9 @@ import java.util.UUID;
 public class Comune {
     @Setter(AccessLevel.NONE)
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "comune_id")
-    private UUID id;
+    private long id;
     private String nome;
     @ManyToOne
     @JoinColumn(name = "provincia_id")

@@ -1,12 +1,12 @@
 package bw5team1.epicenergyservices.controllers;
 
 import bw5team1.epicenergyservices.exceptions.BadRequestException;
-import bw5team1.epicenergyservices.payloads.utente.NewUtenteDTO;
-import bw5team1.epicenergyservices.payloads.utente.NewUtenteRespDTO;
-import bw5team1.epicenergyservices.payloads.utente.UtenteLoginDTO;
-import bw5team1.epicenergyservices.payloads.utente.UtenteLoginRespDTO;
+import bw5team1.epicenergyservices.entities.utente.NewUtenteDTO;
+import bw5team1.epicenergyservices.entities.utente.NewUtenteRespDTO;
+import bw5team1.epicenergyservices.entities.utente.UtenteLoginDTO;
+import bw5team1.epicenergyservices.entities.utente.UtenteLoginRespDTO;
 import bw5team1.epicenergyservices.services.AuthService;
-import bw5team1.epicenergyservices.services.UtenteService;
+import bw5team1.epicenergyservices.entities.utente.UtenteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;

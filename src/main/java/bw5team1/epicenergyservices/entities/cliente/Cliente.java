@@ -1,8 +1,8 @@
 package bw5team1.epicenergyservices.entities.cliente;
 
 import bw5team1.epicenergyservices.entities.fattura.Fattura;
-import bw5team1.epicenergyservices.entities.SedeLegale;
-import bw5team1.epicenergyservices.entities.SedeOperativa;
+import bw5team1.epicenergyservices.entities.sedeLegale.SedeLegale;
+import bw5team1.epicenergyservices.entities.sedeOperativa.SedeOperativa;
 import jakarta.persistence.*;
 import lombok.*;
 

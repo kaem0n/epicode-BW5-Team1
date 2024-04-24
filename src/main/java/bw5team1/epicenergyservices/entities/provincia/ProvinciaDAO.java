@@ -1,4 +1,4 @@
-package bw5team1.epicenergyservices.repositories;
+package bw5team1.epicenergyservices.entities.provincia;
 
 
 
@@ -9,4 +9,5 @@ import java.util.Optional;
 
 public interface ProvinciaDAO extends JpaRepository<Provincia, String> {
     Optional<Provincia> findBySigla(String sigla);
+    Optional<Provincia> findByNome(String nome);
 }

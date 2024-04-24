@@ -1,4 +1,4 @@
-package bw5team1.epicenergyservices.payloads.utente;
+package bw5team1.epicenergyservices.entities.utente;
 
 import java.util.UUID;
 

@@ -1,4 +1,4 @@
-package bw5team1.epicenergyservices.payloads.indirizzo;
+package bw5team1.epicenergyservices.entities.indirizzo;
 
 import java.util.UUID;
 

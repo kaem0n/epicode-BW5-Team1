@@ -1,4 +1,4 @@
-package bw5team1.epicenergyservices.payloads.errors;
+package bw5team1.epicenergyservices.payloads;
 
 import java.util.Date;
 import java.util.List;

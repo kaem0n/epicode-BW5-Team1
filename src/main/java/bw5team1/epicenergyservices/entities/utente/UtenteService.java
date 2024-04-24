@@ -1,11 +1,7 @@
-package bw5team1.epicenergyservices.services;
+package bw5team1.epicenergyservices.entities.utente;
 
-import bw5team1.epicenergyservices.entities.Utente;
-import bw5team1.epicenergyservices.enums.TipoUtente;
 import bw5team1.epicenergyservices.exceptions.BadRequestException;
 import bw5team1.epicenergyservices.exceptions.NotFoundException;
-import bw5team1.epicenergyservices.payloads.utente.NewUtenteDTO;
-import bw5team1.epicenergyservices.repositories.UtenteDAO;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service

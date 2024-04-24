@@ -1,4 +1,4 @@
-package bw5team1.epicenergyservices.payloads.indirizzo;
+package bw5team1.epicenergyservices.entities.indirizzo;
 
 import bw5team1.epicenergyservices.entities.comune.Comune;
 import jakarta.validation.constraints.NotEmpty;

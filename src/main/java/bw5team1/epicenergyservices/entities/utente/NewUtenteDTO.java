@@ -1,6 +1,5 @@
-package bw5team1.epicenergyservices.payloads.utente;
+package bw5team1.epicenergyservices.entities.utente;
 
-import bw5team1.epicenergyservices.enums.TipoUtente;
 import jakarta.validation.constraints.*;
 
 public record NewUtenteDTO(@NotEmpty(message = "L'username è obbligatorio")

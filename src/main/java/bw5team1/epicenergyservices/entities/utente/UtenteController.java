@@ -1,12 +1,11 @@
-package bw5team1.epicenergyservices.controllers;
+package bw5team1.epicenergyservices.entities.utente;
 
-import bw5team1.epicenergyservices.entities.Utente;
-import bw5team1.epicenergyservices.services.UtenteService;
+import bw5team1.epicenergyservices.entities.utente.Utente;
+import bw5team1.epicenergyservices.entities.utente.UtenteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 

@@ -1,7 +1,7 @@
-package bw5team1.epicenergyservices.controllers;
+package bw5team1.epicenergyservices.entities.indirizzo;
 
-import bw5team1.epicenergyservices.entities.Indirizzo;
-import bw5team1.epicenergyservices.services.IndirizzoService;
+import bw5team1.epicenergyservices.entities.indirizzo.Indirizzo;
+import bw5team1.epicenergyservices.entities.indirizzo.IndirizzoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.PathVariable;

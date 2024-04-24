@@ -1,9 +1,9 @@
 package bw5team1.epicenergyservices.services;
 
-import bw5team1.epicenergyservices.entities.Utente;
+import bw5team1.epicenergyservices.entities.utente.Utente;
+import bw5team1.epicenergyservices.entities.utente.UtenteService;
 import bw5team1.epicenergyservices.exceptions.UnauthorizedException;
-import bw5team1.epicenergyservices.payloads.utente.UtenteLoginDTO;
-import bw5team1.epicenergyservices.security.JWTFilter;
+import bw5team1.epicenergyservices.entities.utente.UtenteLoginDTO;
 import bw5team1.epicenergyservices.security.JWTTools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;

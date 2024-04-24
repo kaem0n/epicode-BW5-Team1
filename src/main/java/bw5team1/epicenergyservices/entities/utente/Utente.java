@@ -1,6 +1,5 @@
-package bw5team1.epicenergyservices.entities;
+package bw5team1.epicenergyservices.entities.utente;
 
-import bw5team1.epicenergyservices.enums.TipoUtente;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
