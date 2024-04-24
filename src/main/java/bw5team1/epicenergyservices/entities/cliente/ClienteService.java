@@ -1,6 +1,10 @@
 package bw5team1.epicenergyservices.entities.cliente;
 
+import bw5team1.epicenergyservices.entities.Indirizzo;
+import bw5team1.epicenergyservices.entities.comune.Comune;
+import bw5team1.epicenergyservices.entities.comune.ComuneService;
 import bw5team1.epicenergyservices.entities.fattura.Fattura;
+import bw5team1.epicenergyservices.services.IndirizzoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.domain.*;
@@ -15,6 +19,12 @@ import java.util.stream.Collectors;
 public class ClienteService {
     @Autowired
     ClienteRepository clienteRepository;
+
+    @Autowired
+    ComuneService comuneService;
+
+    @Autowired
+    IndirizzoService indirizzoService;
 
     // trova cliente per id
     public Cliente findById(UUID id) throws ChangeSetPersister.NotFoundException {
@@ -79,4 +89,34 @@ public class ClienteService {
         // Salva il cliente aggiornato nel repository
         return clienteRepository.save(cliente);
     }
+
+    // modifica cliente
+//    public Cliente findByIdAndUpdate(UUID id, ClientePayload body) throws ChangeSetPersister.NotFoundException {
+//
+//        Cliente found = this.findById(id);
+//
+//        found.setRagioneSociale(body.ragioneSociale());
+//        found.setPartitaIva(body.partitaIva());
+//        found.setEmail(body.email());
+//        found.setPec(body.pec());
+//        found.setTelefono(body.telefonoCliente());
+//        found.setNomeContatto(body.nomeContatto());
+//        found.setCognomeContatto(body.cognomeContatto());
+//        found.setEmailContatto(body.emailContatto());
+//        found.setTelefonoContatto(body.telefonoContatto());
+//
+//        if (!body.viaUno().equals(found.getSedeLegale().getVia())) {
+//            Comune comune = comuneService.findByNameIgnoreCase(body.comuneUno());
+//            Indirizzo indirizzo = indirizzoService.create(body.viaUno(), body.civicoUno(), body.localitaUno(), body.capUno(), comune);
+//            found.setSedeLegale(indirizzo);
+//        }
+//
+//        if (!body.viaDue().equals(found.getSedeOperativa().getVia())) {
+//            Comune comune = comuneService.findByNameIgnoreCase(body.comuneDue());
+//            Indirizzo indirizzo = indirizzoService.create(body.viaDue(), body.civicoDue(), body.localitaDue(), body.capDue(), comune);
+//            found.setSedeOperativa(indirizzo);
+//        }
+//
+//        return clienteRepository.save(found);
+//    }
 }
