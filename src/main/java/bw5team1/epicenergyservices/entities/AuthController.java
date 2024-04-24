@@ -13,6 +13,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -27,8 +29,7 @@ public class AuthController {
     }
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public NewUtenteRespDTO save(@RequestBody @Validated NewUtenteDTO body, BindingResult validation)
-    {
+    public NewUtenteRespDTO save(@RequestBody @Validated NewUtenteDTO body, BindingResult validation) throws IOException {
         if(validation.hasErrors()) {
             throw new BadRequestException(validation.getAllErrors());
         }
