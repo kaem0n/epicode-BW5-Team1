@@ -54,11 +54,11 @@ public class UtenteService {
     }
 
     public Utente findByIdAndUpdate(UUID id, Utente body){
-
         Utente found = this.findById(id);
         found.setNome(body.getNome());
         found.setCognome(body.getCognome());
         found.setEmail(body.getEmail());
+        //per il momento non cambiamo la password
         //found.setPassword(body.getPassword());
         found.setUsername(body.getUsername());
         found.setAvatarUrl("https://ui-avatars.com/api/?name=" + body.getNome().charAt(0) + "+" + body.getCognome().charAt(0));
