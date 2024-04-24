@@ -52,7 +52,6 @@ public class DatabaseCheckRunner implements CommandLineRunner {
                 Comune entry = new Comune(nome, ps.findByName(provincia));
 
                 cd.save(entry);
-                System.out.println("Comune salvato: " + i);
             }
         }
     }
