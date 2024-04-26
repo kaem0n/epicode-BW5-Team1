@@ -23,6 +23,7 @@ import java.util.UUID;
 public class Cliente {
     @Setter(AccessLevel.NONE)
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "cliente_id")
     //CAMBIATO DA LONG A UUID
     private UUID id;
@@ -62,7 +63,8 @@ public class Cliente {
     @Builder.Default
     private List<Fattura> fatture = new ArrayList<Fattura>();
 
-    public Cliente(String ragioneSociale, long partitaIva, String email, int fatturatoAnnuale, String pec, String telefono, String nomeContatto, String emailContatto, String cognomeContatto, String telefonoContatto, String logoUrl, TipoCliente tipo, SedeLegale sedeLegale, SedeOperativa sedeOperativa) {
+    public Cliente(String ragioneSociale, long partitaIva, String email, int fatturatoAnnuale, String pec, String telefono, String nomeContatto,
+                   String emailContatto, String cognomeContatto, String telefonoContatto, TipoCliente tipo) {
         this.ragioneSociale = ragioneSociale;
         this.partitaIva = partitaIva;
         this.email = email;
@@ -75,9 +77,6 @@ public class Cliente {
         this.emailContatto = emailContatto;
         this.cognomeContatto = cognomeContatto;
         this.telefonoContatto = telefonoContatto;
-        this.logoUrl = logoUrl;
         this.tipo = tipo;
-        this.sedeLegale = sedeLegale;
-        this.sedeOperativa = sedeOperativa;
     }
 }

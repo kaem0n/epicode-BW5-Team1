@@ -14,6 +14,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity
 @Table(name = "indirizzi")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Indirizzo {
     @Setter(AccessLevel.NONE)
     @Id

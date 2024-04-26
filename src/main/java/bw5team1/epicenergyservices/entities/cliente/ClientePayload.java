@@ -28,7 +28,9 @@ public record ClientePayload(
         int civicoDue,
 //        String localitaDue,
         int capDue,
-        String comuneDue
+        String comuneDue,
+        int fatturatoAnnuale,
+        String tipo
 ) {
 }
 

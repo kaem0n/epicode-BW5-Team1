@@ -35,8 +35,8 @@ public class ClienteService {
     IndirizzoDAO indirizzoDAO;
 
     // trova cliente per id
-    public Cliente findById(UUID id) throws ChangeSetPersister.NotFoundException {
-        return clienteRepository.findById(id).orElseThrow(() -> new ChangeSetPersister.NotFoundException());
+    public Cliente findById(UUID id) {
+        return clienteRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
     }
     // trova cliente per id ed elimina
     public void findByIdAndDelete(UUID id) throws ChangeSetPersister.NotFoundException {
@@ -98,8 +98,12 @@ public class ClienteService {
         return clienteRepository.save(cliente);
     }
 
+    public Cliente findByPec(String pec) {
+        return clienteRepository.findByPec(pec).orElseThrow(() -> new NotFoundException("Nessun cliente con PEC " + pec + " trovato."));
+    }
+
     // modifica cliente
-    public Cliente findByIdAndUpdate(UUID id, ClientePayload body) throws ChangeSetPersister.NotFoundException {
+    public Cliente findByIdAndUpdate(UUID id, ClientePayload body) {
 
         Cliente found = this.findById(id);
 
@@ -124,39 +128,23 @@ public class ClienteService {
         return clienteRepository.save(found);
     }
 
-    public Cliente creaCliente(ClientePayload body) throws NotFoundException {
-
+    public Cliente creaCliente(ClientePayload body) {
         // Crea un cliente vuoto
-        Cliente newCliente = new Cliente();
-
-        //Salva il cliente
-//        clienteRepository.save(newCliente);
+        Cliente newCliente = clienteRepository.save(new Cliente(body.ragioneSociale(), body.partitaIva(), body.email(), body.fatturatoAnnuale(), body.pec(),
+                body.telefonoCliente(), body.nomeContatto(), body.emailContatto(), body.cognomeContatto(), body.telefonoContatto(),
+                TipoCliente.valueOf(body.tipo())));
 
         // Crea indirizzo 1
         Comune comuneUno = comuneService.findByNome(body.comuneUno());
-        SedeLegale sedeLegale = new SedeLegale(body.civicoUno(), body.viaUno(), body.capUno(), comuneUno, newCliente);
+        SedeLegale sedeLegale = indirizzoDAO.save(new SedeLegale(body.civicoUno(), body.viaUno(), body.capUno(), comuneUno, newCliente));
 
         // Crea indirizzo 2
         Comune comuneDue = comuneService.findByNome(body.comuneDue());
-        SedeOperativa sedeOperativa = new SedeOperativa(body.civicoDue(), body.viaDue(), body.capDue(), comuneDue, newCliente);
+        SedeOperativa sedeOperativa = indirizzoDAO.save(new SedeOperativa(body.civicoDue(), body.viaDue(), body.capDue(), comuneDue, newCliente));
 
         // Imposta i dettagli del cliente
-        newCliente.setRagioneSociale(body.ragioneSociale());
-        newCliente.setPartitaIva(body.partitaIva());
-        newCliente.setEmail(body.email());
-        newCliente.setPec(body.pec());
-        newCliente.setTelefono(body.telefonoCliente());
-        newCliente.setNomeContatto(body.nomeContatto());
-        newCliente.setCognomeContatto(body.cognomeContatto());
-        newCliente.setEmailContatto(body.emailContatto());
-        newCliente.setTelefonoContatto(body.telefonoContatto());
-        newCliente.setDataInserimento(LocalDate.now());
         newCliente.setSedeLegale(sedeLegale);
         newCliente.setSedeOperativa(sedeOperativa);
-
-        // Salva i nuovi indirizzi
-        indirizzoDAO.save(sedeLegale);
-        indirizzoDAO.save(sedeOperativa);
 
         // Salva il cliente con gli indirizzi associati
         return clienteRepository.save(newCliente);
