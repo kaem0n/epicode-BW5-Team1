@@ -17,27 +17,24 @@ import java.util.UUID;
 public class Fattura {
     @Setter(AccessLevel.NONE)
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "fattura_id")
-    private UUID id;
+    private long id;
     private LocalDate data;
     //CAMBIATO IMPORTO DA INT A DOUBLE
     private double importo;
     //CAMBIATO IMPORTO DA LONG A DOUBLE
-    private double numero;
     private String stato;
     //CAMBIATO DA CLIENTE A UUID
-//    @ManyToOne
-//    @JoinColumn(name = "cliente_id")
-    private UUID idCliente;
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente;
 
-    public Fattura(LocalDate data, double importo, double numero, String stato, UUID idCliente) {
+    public Fattura(LocalDate data, double importo, String stato, Cliente cliente) {
         this.data = data;
         this.importo = importo;
-        this.numero = numero;
         this.stato = stato;
-        this.idCliente = idCliente;
+        this.cliente = cliente;
     }
 
     //    public Fattura(LocalDate data, int importo, long numero, String stato, Cliente cliente) {

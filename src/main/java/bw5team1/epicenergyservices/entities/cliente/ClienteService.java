@@ -1,6 +1,15 @@
 package bw5team1.epicenergyservices.entities.cliente;
 
+import bw5team1.epicenergyservices.entities.comune.Comune;
+import bw5team1.epicenergyservices.entities.comune.ComuneService;
 import bw5team1.epicenergyservices.entities.fattura.Fattura;
+
+import bw5team1.epicenergyservices.entities.indirizzo.Indirizzo;
+import bw5team1.epicenergyservices.entities.indirizzo.IndirizzoDAO;
+import bw5team1.epicenergyservices.entities.indirizzo.IndirizzoService;
+import bw5team1.epicenergyservices.entities.sedeLegale.SedeLegale;
+import bw5team1.epicenergyservices.entities.sedeOperativa.SedeOperativa;
+import bw5team1.epicenergyservices.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.domain.*;
@@ -16,9 +25,18 @@ public class ClienteService {
     @Autowired
     ClienteRepository clienteRepository;
 
+    @Autowired
+    ComuneService comuneService;
+
+    @Autowired
+    IndirizzoService indirizzoService;
+
+    @Autowired
+    IndirizzoDAO indirizzoDAO;
+
     // trova cliente per id
-    public Cliente findById(UUID id) throws ChangeSetPersister.NotFoundException {
-        return clienteRepository.findById(id).orElseThrow(() -> new ChangeSetPersister.NotFoundException());
+    public Cliente findById(UUID id) {
+        return clienteRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
     }
     // trova cliente per id ed elimina
     public void findByIdAndDelete(UUID id) throws ChangeSetPersister.NotFoundException {
@@ -79,4 +97,59 @@ public class ClienteService {
         // Salva il cliente aggiornato nel repository
         return clienteRepository.save(cliente);
     }
+
+    public Cliente findByPec(String pec) {
+        return clienteRepository.findByPec(pec).orElseThrow(() -> new NotFoundException("Nessun cliente con PEC " + pec + " trovato."));
+    }
+
+    // modifica cliente
+    public Cliente findByIdAndUpdate(UUID id, ClientePayload body) {
+
+        Cliente found = this.findById(id);
+
+        found.setRagioneSociale(body.ragioneSociale());
+        found.setPartitaIva(body.partitaIva());
+        found.setEmail(body.email());
+        found.setPec(body.pec());
+        found.setTelefono(body.telefonoCliente());
+        found.setNomeContatto(body.nomeContatto());
+        found.setCognomeContatto(body.cognomeContatto());
+        found.setEmailContatto(body.emailContatto());
+        found.setTelefonoContatto(body.telefonoContatto());
+
+        // indirizzo 1
+        Comune comuneUno = comuneService.findByNome(body.comuneUno());
+        SedeLegale sedeLegale = new SedeLegale(body.civicoUno(), body.viaUno(), body.capUno(), comuneUno, found);
+
+        // indirizzo 2
+        Comune comuneDue = comuneService.findByNome(body.comuneDue());
+        SedeOperativa sedeOperativa = new SedeOperativa(body.civicoDue(), body.viaDue(), body.capDue(), comuneDue, found);
+
+        return clienteRepository.save(found);
+    }
+
+    public Cliente creaCliente(ClientePayload body) {
+        // Crea un cliente vuoto
+        Cliente newCliente = clienteRepository.save(new Cliente(body.ragioneSociale(), body.partitaIva(), body.email(), body.fatturatoAnnuale(), body.pec(),
+                body.telefonoCliente(), body.nomeContatto(), body.emailContatto(), body.cognomeContatto(), body.telefonoContatto(),
+                TipoCliente.valueOf(body.tipo())));
+
+        // Crea indirizzo 1
+        Comune comuneUno = comuneService.findByNome(body.comuneUno());
+        SedeLegale sedeLegale = indirizzoDAO.save(new SedeLegale(body.civicoUno(), body.viaUno(), body.capUno(), comuneUno, newCliente));
+
+        // Crea indirizzo 2
+        Comune comuneDue = comuneService.findByNome(body.comuneDue());
+        SedeOperativa sedeOperativa = indirizzoDAO.save(new SedeOperativa(body.civicoDue(), body.viaDue(), body.capDue(), comuneDue, newCliente));
+
+        // Imposta i dettagli del cliente
+        newCliente.setSedeLegale(sedeLegale);
+        newCliente.setSedeOperativa(sedeOperativa);
+
+        // Salva il cliente con gli indirizzi associati
+        return clienteRepository.save(newCliente);
+    }
+
+
+
 }

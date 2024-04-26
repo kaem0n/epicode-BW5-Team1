@@ -1,8 +1,8 @@
 package bw5team1.epicenergyservices.security;
 
-import bw5team1.epicenergyservices.entities.Utente;
+import bw5team1.epicenergyservices.entities.utente.Utente;
 import bw5team1.epicenergyservices.exceptions.UnauthorizedException;
-import bw5team1.epicenergyservices.services.UtenteService;
+import bw5team1.epicenergyservices.entities.utente.UtenteService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.util.UUID;
 
 @Component
-
 public class JWTFilter extends OncePerRequestFilter {
     @Autowired
     private JWTTools jwtTools;

@@ -1,5 +1,6 @@
 package bw5team1.epicenergyservices.entities.provincia;
 
+import bw5team1.epicenergyservices.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -7,31 +8,25 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
-/*@Service
+@Service
 public class ProvinciaService {
     @Autowired
-    private ProvinciaRepository provinciaRepo;
+    private ProvinciaDAO provinciaDAO;
 
-    public Provincia create(String sigla, String provincia, String regione) {
 
-        Provincia p = new Provincia(sigla, provincia);
-
-        return provinciaRepo.save(p);
+    public Page<Provincia> findAll(int page, int size, String sort) {
+        if(size > 50) size = 50;
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
+        return provinciaDAO.findAll(pageable);
     }
 
-    public List<Provincia> find() {
-        return provinciaRepo.findAll();
+    public Provincia findById(String sigla) {
+        return provinciaDAO.findById(sigla).orElseThrow(() ->new NotFoundException(sigla));
     }
 
-    public Page<Provincia> findAll(int page, String ordinamento) {
-        Pageable pagina = PageRequest.of(page, 10, Sort.by(ordinamento));
-        return provinciaRepo.findAll(pagina);
+    public Provincia findByName(String nome){
+        return provinciaDAO.findByNomeIgnoreCase(nome).orElseThrow(() -> new NotFoundException(nome));
     }
 
-    public Provincia findByName(String nomeProvincia) {
-        return provinciaRepo.findByProvinciaIgnoreCase(nomeProvincia);
-    }
 
-}*/
+}

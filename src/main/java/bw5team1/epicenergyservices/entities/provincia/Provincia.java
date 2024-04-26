@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.UUID;
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -16,15 +14,14 @@ import java.util.UUID;
 public class Provincia {
     @Setter(AccessLevel.NONE)
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "provincia_id")
-    private long id;
-    private String nome;
     private String sigla;
+    private String nome;
+    private String regione;
 
-    public Provincia(String nome, String sigla) {
+    public Provincia(String nome, String regione, String sigla) {
         this.nome = nome;
+        this.regione = regione;
         this.sigla = sigla;
     }
 }
-
