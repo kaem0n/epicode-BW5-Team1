@@ -38,7 +38,7 @@ public class FatturaController {
     // ---------------------------------------------------------------------------
     // elimina
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteById(@PathVariable long id) throws NotFoundException {
         fatturaService.findByIdAndDelete(id);
     }
@@ -46,21 +46,21 @@ public class FatturaController {
     // ---------------------------------------------------------------------------
     // modifica
     @PutMapping("/{id}")
-    public Fattura update(@PathVariable long id, AggiornaFatturaPayload payload) {
+    public Fattura update(@PathVariable long id, @RequestBody AggiornaFatturaPayload payload) {
         return fatturaService.findByIdAndUpdate(id, payload);
     }
 
     // ---------------------------------------------------------------------------
     // filtro per cliente
     @GetMapping("/filter")
-    public Page<Fattura> filterByPec(@RequestParam(required = false) String pec,
-                                     @RequestParam(required = false) String statoFattura,
-                                     @RequestParam(required = false) LocalDate data,
-                                     @RequestParam(required = false) String minImporto,
-                                     @RequestParam(required = false) String maxImporto,
-                                     @RequestParam(required = false) String anno,
-                                     @RequestParam(defaultValue = "0") int page,
-                                     @RequestParam(defaultValue = "10") int pageSize) {
+    public Page<Fattura> filter(@RequestParam(required = false) String pec,
+                                @RequestParam(required = false) String statoFattura,
+                                @RequestParam(required = false) LocalDate data,
+                                @RequestParam(required = false) String minImporto,
+                                @RequestParam(required = false) String maxImporto,
+                                @RequestParam(required = false) String anno,
+                                @RequestParam(defaultValue = "0") int page,
+                                @RequestParam(defaultValue = "10") int pageSize) {
         if (pec != null) return fatturaService.filterByCliente(pec, page, pageSize);
         else if (statoFattura != null) return fatturaService.filterByStatoFattura(statoFattura, page, pageSize);
         else if (data != null) return fatturaService.filterByData(data, page, pageSize);
