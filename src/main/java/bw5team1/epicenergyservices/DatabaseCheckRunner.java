@@ -12,6 +12,7 @@ import bw5team1.epicenergyservices.entities.utente.UtenteDAO;
 import bw5team1.epicenergyservices.tools.CsvHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -29,6 +30,8 @@ public class DatabaseCheckRunner implements CommandLineRunner {
     private UtenteDAO ud;
     @Autowired
     private CsvHandler csvHandler;
+    @Autowired
+    private PasswordEncoder bcrypt;
 
     @Override
     public void run(String... args) throws Exception {
@@ -60,7 +63,7 @@ public class DatabaseCheckRunner implements CommandLineRunner {
         }
 
         if (!ud.existsByEmail("admin@gmail.com")) {
-            ud.save(new Utente("admin", "1234", "admin@gmail.com", null, null, null, TipoUtente.ADMIN));
+            ud.save(new Utente("admin", bcrypt.encode("1234"), "admin@gmail.com", null, null, null, TipoUtente.ADMIN));
         }
     }
 }
