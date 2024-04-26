@@ -36,12 +36,4 @@ public class Fattura {
         this.stato = stato;
         this.cliente = cliente;
     }
-
-    //    public Fattura(LocalDate data, int importo, long numero, String stato, Cliente cliente) {
-//        this.data = data;
-//        this.importo = importo;
-//        this.numero = numero;
-//        this.stato = stato;
-//        this.cliente = cliente;
-//    }
 }

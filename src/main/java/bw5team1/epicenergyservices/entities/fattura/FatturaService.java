@@ -28,15 +28,6 @@ public class FatturaService {
 
     // creazione cliente
     public Fattura creaFattura(FatturaPayload body) {
-
-//        Optional<Fattura> fatturaMax = fatturaRepository.findAll().stream()
-//                .max((f1, f2) -> Double.compare(f1.getNumero(), f2.getNumero()));
-//
-//        double f = 1;
-//
-//        if (fatturaMax.isPresent())
-//            f = fatturaMax.get().getNumero() + 1;
-
         Cliente found = clienteService.findById(UUID.fromString(body.idCliente()));
 
         Fattura newFattura = Fattura.builder()
@@ -67,14 +58,14 @@ public class FatturaService {
 
 
     //IN ATTESA DI EXCEPTION
-    public Fattura findById(long id) throws NotFoundException {
+    public Fattura findById(long id) {
         return fatturaRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
     }
 
-    public Fattura findByIdAndUpdate(long id, AggiornaFatturaPayload body){
+    public Fattura findByIdAndUpdate(long id, AggiornaFatturaPayload body) {
         Fattura fatturaTrovata = this.findById(id);
+        fatturaTrovata.setImporto(body.importo());
         fatturaTrovata.setStato(body.stato());
-        fatturaTrovata.setImporto(Double.parseDouble(body.importo()));
         return fatturaRepository.save(fatturaTrovata);
     }
 
