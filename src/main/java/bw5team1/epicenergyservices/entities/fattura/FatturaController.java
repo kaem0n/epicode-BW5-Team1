@@ -44,6 +44,13 @@ public class FatturaController {
     }
 
     // ---------------------------------------------------------------------------
+    // modifica
+    @PutMapping("/{id}")
+    public Fattura update(@PathVariable long id, AggiornaFatturaPayload payload) {
+        return fatturaService.findByIdAndUpdate(id, payload);
+    }
+
+    // ---------------------------------------------------------------------------
     // filtro per cliente
     @GetMapping("/filter")
     public Page<Fattura> filterByPec(@RequestParam(required = false) String pec,
@@ -63,16 +70,4 @@ public class FatturaController {
         else if (anno != null) return fatturaService.filterByAnno(Integer.parseInt(anno), page, pageSize);
         else throw new BadRequestException("Request is missing parameters.");
     }
-
-    //---------------------------------------------------------------------------
-    // filtro per anno
-//    @GetMapping("/filter/anno")
-//    public Page<Fattura> filterByAnno(
-//            @RequestParam int anno,
-//            @RequestParam(defaultValue = "0") int page,
-//            @RequestParam(defaultValue = "10") int pageSize
-//    ) {
-//        return fatturaService.filterByAnno(anno, page, pageSize);
-//    }
-
 }
