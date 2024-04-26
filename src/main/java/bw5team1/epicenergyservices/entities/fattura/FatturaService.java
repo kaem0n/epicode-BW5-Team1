@@ -71,10 +71,10 @@ public class FatturaService {
         return fatturaRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
     }
 
-    public Fattura findByIdAndUpdate(long id, FatturaPayload body) throws NotFoundException {
+    public Fattura findByIdAndUpdate(long id, AggiornaFatturaPayload body){
         Fattura fatturaTrovata = this.findById(id);
         fatturaTrovata.setStato(body.stato());
-        fatturaTrovata.setImporto(body.importo());
+        fatturaTrovata.setImporto(Double.parseDouble(body.importo()));
         return fatturaRepository.save(fatturaTrovata);
     }
 
