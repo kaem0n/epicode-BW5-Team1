@@ -7,10 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 @RestController
-@RequestMapping("/fattura")
+@RequestMapping("/fatture")
 public class FatturaController {
 
     @Autowired
@@ -24,18 +23,14 @@ public class FatturaController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Fattura salvaFattura(@RequestBody FatturaPayload body) throws Exception {
-
-        Fattura fatturaCreata = fatturaService.creaFattura(body);
-
-        return fatturaCreata;
-
+    public Fattura salvaFattura(@RequestBody FatturaPayload body){
+        return fatturaService.creaFattura(body);
     }
 
     // ---------------------------------------------------------------------------
     // trova per id
     @GetMapping("/{id}")
-    public Fattura findById(@PathVariable UUID id) throws NotFoundException {
+    public Fattura findById(@PathVariable long id) throws NotFoundException {
         return fatturaService.findById(id);
     }
 
@@ -43,17 +38,17 @@ public class FatturaController {
     // elimina
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteById(@PathVariable UUID id) throws NotFoundException {
+    public void deleteById(@PathVariable long id) throws NotFoundException {
         fatturaService.findByIdAndDelete(id);
     }
 
     // ---------------------------------------------------------------------------
     // filtro per cliente
-    @GetMapping("/filter/ragioneSociale")
-    public Page<Fattura> filterByRagioneSociale(@RequestParam String ragioneSociale,
-                                                @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int pageSize) {
-        return fatturaService.filterByCliente(ragioneSociale, page, pageSize);
-    }
+//    @GetMapping("/filter/ragioneSociale")
+//    public Page<Fattura> filterByRagioneSociale(@RequestParam String ragioneSociale,
+//                                                @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int pageSize) {
+//        return fatturaService.filterByCliente(ragioneSociale, page, pageSize);
+//    }
 
     // ---------------------------------------------------------------------------
     // filtro per stato fattura

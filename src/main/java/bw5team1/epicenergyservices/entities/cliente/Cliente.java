@@ -3,6 +3,7 @@ package bw5team1.epicenergyservices.entities.cliente;
 import bw5team1.epicenergyservices.entities.fattura.Fattura;
 import bw5team1.epicenergyservices.entities.sedeLegale.SedeLegale;
 import bw5team1.epicenergyservices.entities.sedeOperativa.SedeOperativa;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -59,8 +60,9 @@ public class Cliente {
     @OneToOne
     @JoinColumn(name = "sede_operativa_id")
     private SedeOperativa sedeOperativa;
-    @OneToMany
+    @OneToMany(mappedBy = "cliente")
     @Builder.Default
+    @JsonIgnore
     private List<Fattura> fatture = new ArrayList<Fattura>();
 
     public Cliente(String ragioneSociale, long partitaIva, String email, int fatturatoAnnuale, String pec, String telefono, String nomeContatto,
@@ -69,7 +71,6 @@ public class Cliente {
         this.partitaIva = partitaIva;
         this.email = email;
         this.dataInserimento = LocalDate.now();
-//        this.dataUltimoContatto = dataUltimoContatto;
         this.fatturatoAnnuale = fatturatoAnnuale;
         this.pec = pec;
         this.telefono = telefono;
