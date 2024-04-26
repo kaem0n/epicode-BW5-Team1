@@ -12,7 +12,7 @@ import java.util.UUID;
 @Repository
 public interface FatturaRepository extends JpaRepository<Fattura, Long> {
 
-//    Page<Fattura> findByIdCliente(UUID cliente, Pageable pageable);
+    Page<Fattura> findByCliente(Cliente cliente, Pageable pageable);
     Page<Fattura> findByStato(String stato, Pageable pageable);
     Page<Fattura> findByData(LocalDate data, Pageable pageable);
 //    Page<Fattura> findByAnno(int anno, Pageable pageable);

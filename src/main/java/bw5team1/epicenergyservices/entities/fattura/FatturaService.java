@@ -84,11 +84,11 @@ public class FatturaService {
     }
 
     // filtro per cliente
-//    public Page<Fattura> filterByCliente(String ragioneSociale, int page, int pageSize) {
-//        UUID clienteId = clienteRepository.findByRagioneSociale(ragioneSociale).get().getId();
-//        Pageable pageable = PageRequest.of(page, pageSize);
-//        return fatturaRepository.findByIdCliente(clienteId, pageable);
-//    }
+    public Page<Fattura> filterByCliente(String pec, int page, int pageSize) {
+        Cliente cliente = clienteService.findByPec(pec);
+        Pageable pageable = PageRequest.of(page, pageSize);
+        return fatturaRepository.findByCliente(cliente, pageable);
+    }
 
     // filtro per stato fattura
     public Page<Fattura> filterByStatoFattura(String stato, int page, int pageSize) {

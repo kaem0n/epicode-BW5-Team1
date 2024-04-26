@@ -1,5 +1,6 @@
 package bw5team1.epicenergyservices.entities.fattura;
 
+import bw5team1.epicenergyservices.exceptions.BadRequestException;
 import bw5team1.epicenergyservices.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -44,26 +45,21 @@ public class FatturaController {
 
     // ---------------------------------------------------------------------------
     // filtro per cliente
-//    @GetMapping("/filter/ragioneSociale")
-//    public Page<Fattura> filterByRagioneSociale(@RequestParam String ragioneSociale,
-//                                                @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int pageSize) {
-//        return fatturaService.filterByCliente(ragioneSociale, page, pageSize);
-//    }
-
-    // ---------------------------------------------------------------------------
-    // filtro per stato fattura
-    @GetMapping("/filter/statoFattura")
-    public Page<Fattura> filterByStatoFattura(@RequestParam String statoFattura,
-                                              @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int pageSize) {
-        return fatturaService.filterByStatoFattura(statoFattura, page, pageSize);
-    }
-
-    // ---------------------------------------------------------------------------
-    // filtro per data
-    @GetMapping("/filter/data")
-    public Page<Fattura> filterByData(@RequestParam LocalDate data, @RequestParam(defaultValue = "0") int page,
-                                      @RequestParam(defaultValue = "10") int pageSize) {
-        return fatturaService.filterByData(data, page, pageSize);
+    @GetMapping("/filter")
+    public Page<Fattura> filterByPec(@RequestParam(required = false) String pec,
+                                     @RequestParam(required = false) String statoFattura,
+                                     @RequestParam(required = false) LocalDate data,
+                                     @RequestParam(required = false) String minImporto,
+                                     @RequestParam(required = false) String maxImporto,
+                                     @RequestParam(defaultValue = "0") int page,
+                                     @RequestParam(defaultValue = "10") int pageSize) {
+        if (pec != null) return fatturaService.filterByCliente(pec, page, pageSize);
+        if (statoFattura != null) return fatturaService.filterByStatoFattura(statoFattura, page, pageSize);
+        if (data != null) return fatturaService.filterByData(data, page, pageSize);
+        if (minImporto != null && maxImporto != null) {
+            return fatturaService.filterByImportRange(Double.parseDouble(minImporto), Double.parseDouble(maxImporto), page, pageSize);
+        }
+        else throw new BadRequestException("Request is missing parameters.");
     }
 
     //---------------------------------------------------------------------------
@@ -77,12 +73,4 @@ public class FatturaController {
 //        return fatturaService.filterByAnno(anno, page, pageSize);
 //    }
 
-
-    // ---------------------------------------------------------------------------
-    // filtro per range importi
-    @GetMapping("/filter/importRange")
-    public Page<Fattura> filterByImportRange(@RequestParam double minImporto, @RequestParam double maxImporto,
-                                             @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int pageSize) {
-        return fatturaService.filterByImportRange(minImporto, maxImporto, page, pageSize);
-    }
 }
