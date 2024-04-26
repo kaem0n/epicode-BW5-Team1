@@ -51,14 +51,16 @@ public class FatturaController {
                                      @RequestParam(required = false) LocalDate data,
                                      @RequestParam(required = false) String minImporto,
                                      @RequestParam(required = false) String maxImporto,
+                                     @RequestParam(required = false) String anno,
                                      @RequestParam(defaultValue = "0") int page,
                                      @RequestParam(defaultValue = "10") int pageSize) {
         if (pec != null) return fatturaService.filterByCliente(pec, page, pageSize);
-        if (statoFattura != null) return fatturaService.filterByStatoFattura(statoFattura, page, pageSize);
-        if (data != null) return fatturaService.filterByData(data, page, pageSize);
-        if (minImporto != null && maxImporto != null) {
+        else if (statoFattura != null) return fatturaService.filterByStatoFattura(statoFattura, page, pageSize);
+        else if (data != null) return fatturaService.filterByData(data, page, pageSize);
+        else if (minImporto != null && maxImporto != null) {
             return fatturaService.filterByImportRange(Double.parseDouble(minImporto), Double.parseDouble(maxImporto), page, pageSize);
         }
+        else if (anno != null) return fatturaService.filterByAnno(Integer.parseInt(anno), page, pageSize);
         else throw new BadRequestException("Request is missing parameters.");
     }
 
