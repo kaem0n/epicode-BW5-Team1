@@ -6,6 +6,9 @@ import bw5team1.epicenergyservices.entities.provincia.Provincia;
 import bw5team1.epicenergyservices.entities.provincia.ProvinciaDAO;
 import bw5team1.epicenergyservices.entities.provincia.ProvinciaService;
 import bw5team1.epicenergyservices.entities.comune.ComuneDAO;
+import bw5team1.epicenergyservices.entities.utente.TipoUtente;
+import bw5team1.epicenergyservices.entities.utente.Utente;
+import bw5team1.epicenergyservices.entities.utente.UtenteDAO;
 import bw5team1.epicenergyservices.tools.CsvHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -22,6 +25,8 @@ public class DatabaseCheckRunner implements CommandLineRunner {
     private ProvinciaDAO pd;
     @Autowired
     private ProvinciaService ps;
+    @Autowired
+    private UtenteDAO ud;
     @Autowired
     private CsvHandler csvHandler;
 
@@ -52,6 +57,10 @@ public class DatabaseCheckRunner implements CommandLineRunner {
 
                 cd.save(entry);
             }
+        }
+
+        if (!ud.existsByEmail("admin@gmail.com")) {
+            ud.save(new Utente("admin", "1234", "admin@gmail.com", null, null, null, TipoUtente.ADMIN));
         }
     }
 }
